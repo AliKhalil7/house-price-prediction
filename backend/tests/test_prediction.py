@@ -27,7 +27,7 @@ def test_predict_happy_path():
 
 
 def test_predict_invalid_input():
-    # Missing most required fields, and carpet_area_sqft is the wrong type
+    # Missing required fields, and carpet_area_sqft is wrong type
     payload = {
         "location": "Whitefield",
         "carpet_area_sqft": "not-a-number",

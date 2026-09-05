@@ -10,13 +10,22 @@ function formatPrice(price: number): string {
   return `₹ ${price.toLocaleString("en-IN")}`;
 }
 
+const centeredPageStyle: React.CSSProperties = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  minHeight: "100vh",
+  textAlign: "center",
+};
+
 export default function ResultPage() {
   const location = useLocation();
   const predictedPrice = location.state?.predictedPrice as number | undefined;
 
   if (predictedPrice === undefined) {
     return (
-      <div>
+      <div style={centeredPageStyle}>
         <h1>No prediction found</h1>
         <p>Please fill out the form first to get a prediction.</p>
         <Link to="/">Back to form</Link>
@@ -25,7 +34,7 @@ export default function ResultPage() {
   }
 
   return (
-    <div>
+    <div style={centeredPageStyle}>
       <h1>Predicted Price</h1>
       <p style={{ fontSize: "2rem", fontWeight: "bold" }}>
         {formatPrice(predictedPrice)}

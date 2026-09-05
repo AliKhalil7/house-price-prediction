@@ -5,19 +5,20 @@ Predicts Indian house prices from property details (area, floor, bathrooms, furn
 ## How it works
 React Form → FastAPI /predict → RandomForest model (.pkl) → Predicted price
 
+> FYI: `.pkl` (pickle) is a file format for saving a trained Python object
 
 The model was trained in a Jupyter notebook on the [House Price dataset](https://www.kaggle.com/datasets/juhibhojani/house-price) from Kaggle.
 
 ## Features
 
-- Cleans and processes ~187,000 real property listings from India
+- Cleans and processes around 187,000 real property listings from India
 - Compares 3 regression models (Linear Regression, Gradient Boosting, Random Forest)
 - Serves predictions through a REST API
 - Simple React form for entering property details and viewing the predicted price
 
 ## Tech Stack
 
-Python, pandas, scikit-learn (model) · FastAPI (backend) · React + TypeScript + Vite (frontend)
+Python, pandas, scikit-learn (model) - FastAPI (backend) - React + TypeScript + Vite (frontend)
 
 ## Project Structure
 notebooks/ → data cleaning, training, model export
@@ -33,7 +34,7 @@ kaggle datasets download -d juhibhojani/house-price -p notebooks/data --unzip
 ```
 Run `notebooks/house_price_model.ipynb` top to bottom. This produces `house_price.pkl` and `locations.json`.
 
-> `house_price.pkl` isn't in this repo (it's ~346MB, over GitHub's limit) — you must generate it by running the notebook, then copy it into `backend/models/`.
+> `house_price.pkl` isn't in this repo (it's 346MB, over GitHub's limit '<50MB') — you must generate it by running the notebook, then copy it into `backend/models/`.
 
 > **Note:** the backend requires the exact scikit-learn version used in training (see `requirements.txt`) — a version mismatch can cause the pickle to fail to load.
 
@@ -70,18 +71,21 @@ curl -X POST http://localhost:8000/predict \
   -H "Content-Type: application/json" \
   -d '{"location":"bangalore","carpet_area_sqft":1200,"floor_num":3,"bathroom":2,"balcony":1,"furnishing":"Semi-Furnished","transaction":"Resale","ownership":"Freehold","facing":"East"}'
 ```
-Response: `{ "predicted_price": 8500000.0 }`
+Response: `{ "predicted_price": 10621500 }`
 
 ## Model Performance
 
-| Model | MAE | RMSE | R² |
-|---|---|---|---|
-| **Random Forest (chosen)** | 1,354,452 | 5,705,804 | **0.826** |
-| Gradient Boosting | 3,195,780 | 6,771,222 | 0.755 |
-| Linear Regression | 4,687,508 | 8,890,567 | 0.578 |
+| Model                      | MAE        | RMSE      | R²        |
+|----------------------------|------------|-----------|-----------|
+| **Random Forest (chosen)** | 1,354,452  | 5,705,804 | **0.826** |
+| Gradient Boosting          | 3,195,780  | 6,771,222 | 0.755     |
+| Linear Regression          | 4,687,508  | 8,890,567 | 0.578     |
 
 Random Forest had the best performance and was used for the final model.
 
 ## Screenshots
 
-_(Add screenshots here once the app is fully running — e.g. the form and the result page.)_
+![Prediction form](screenshots/form.png)
+![Predicted price result page](screenshots/result.png)
+![Validation error message](screenshots/ErrorMessage.png)
+![FastAPI docs](screenshots/api-docs.png)
