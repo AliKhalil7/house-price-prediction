@@ -171,7 +171,7 @@ Response: `{ "predicted_price": 10621500 }`
 | Gradient Boosting          | 3,195,780  | 6,771,222 | 0.755     |
 | Linear Regression          | 4,687,508  | 8,890,567 | 0.578     |
 
-Random Forest had the best performance and was used for the final model.
+`Random Forest had the best performance and was used for the final model.`
 
 ## Screenshots
 
