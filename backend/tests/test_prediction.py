@@ -7,7 +7,7 @@ client = TestClient(app)
 
 def test_predict_happy_path():
     payload = {
-        "location": "Whitefield",
+        "location": "bangalore",
         "carpet_area_sqft": 1200,
         "floor_num": 3,
         "bathroom": 2,
@@ -27,10 +27,17 @@ def test_predict_happy_path():
 
 
 def test_predict_invalid_input():
-    # Missing required fields, and carpet_area_sqft is wrong type
+    #carpet_area_sqft is wrong type
     payload = {
-        "location": "Whitefield",
-        "carpet_area_sqft": "not-a-number",
+        "location": "bangalore",
+        "carpet_area_sqft": "abcdefg",  #should be a float
+        "floor_num": 3,
+        "bathroom": 2,
+        "balcony": 1,
+        "furnishing": "Semi-Furnished",
+        "transaction": "Resale",
+        "ownership": "Freehold",
+        "facing": "East",
     }
 
     response = client.post("/predict", json=payload)
