@@ -51,11 +51,25 @@ Get your Kaggle API token:
 2. Click **Generate New Token** — Kaggle will show you a **key** (looks like `KGAT_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`)
    >  **Copy this immediately** — Kaggle only shows the key once and will not display it again.
 3. Your **username** is shown on your Kaggle profile/account page (not in the token popup) — find it there.
-4. Combine both into a `kaggle.json` file yourself using the command format below:
-```bash
-   echo {"username":"your-username","key":"your-key"} > C:\Users\<you>\.kaggle\kaggle.json
+4. Combine both into a `kaggle.json` file yourself using the command for your terminal:
+
+   > Check which terminal you're in: if your prompt shows `PS C:\Users\you>` you're in PowerShell (VS Code's default on Windows); if it just shows `C:\Users\you>` you're in Command Prompt (cmd).
+   > `%USERPROFILE%` (cmd) and `$env:USERPROFILE` (PowerShell) are environment variables that point to your Windows user folder (e.g. `C:\Users\Ali`) — used instead of typing the path manually so the command works on any machine regardless of username.
+
+   **PowerShell:**
+```powershell
+   echo '{"username":"your-username","key":"your-key"}' > $env:USERPROFILE\.kaggle\kaggle.json
 ```
-   *(macOS/Linux: `echo '{"username":"your-username","key":"your-key"}' > ~/.kaggle/kaggle.json`)*
+
+   **Command Prompt (cmd):**
+```cmd
+   echo {"username":"your-username","key":"your-key"} > %USERPROFILE%\.kaggle\kaggle.json
+```
+
+   **macOS/Linux:**
+```bash
+   echo '{"username":"your-username","key":"your-key"}' > ~/.kaggle/kaggle.json
+```
 
 Still from the project root, download the dataset:
 ```bash
